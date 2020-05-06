@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     LayoutModule,
     MatPaginatorModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatStepperModule
   ],
   exports: [
     MatButtonModule,
@@ -58,7 +60,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     LayoutModule,
     MatPaginatorModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule { }

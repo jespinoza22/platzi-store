@@ -9,6 +9,8 @@ import {
 
 import { Product } from '../../../core/models/product.model';
 
+import { CartService } from './../../../core/services/cart.service';
+
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
@@ -21,21 +23,24 @@ export class ProductComponent implements OnInit, OnDestroy {
 
     today = new Date();
 
-  constructor() {
-        console.log('1. constructor');
-    }
+    constructor(
+        private cartService: CartService
+    ) {
+            console.log('1. constructor');
+        }
 
-  ngOnInit() {
+    ngOnInit() {
         console.log('3. ngOnInit');
     }
 
-  ngOnDestroy() {
+    ngOnDestroy() {
         console.log('5. ngOnDestroy');
     }
 
-  addCart() {
-    console.log('añadir al carrito');
-        this.productClicked.emit(this.product.id);
+    addCart() {
+        console.log('añadir al carrito');
+        this.cartService.addCart(this.product);
+        //this.productClicked.emit(this.product.id);
     }
 
 }
