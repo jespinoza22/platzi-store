@@ -44,7 +44,7 @@ export class FormProductComponent implements OnInit {
       title: ['', [Validators.required]],
       price: ['', [Validators.required, MyValidators.isPriceValid]],
       image: '',
-      description: ['', [Validators.required]],
+      description: ['', [Validators.required]]
     });
   }
 

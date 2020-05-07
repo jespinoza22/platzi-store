@@ -22,4 +22,8 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addOneToCart(id: string){
+    this.cartService.addOneToCart(id);
+    this.products$ = this.cartService.cart$;
+  }
 }
