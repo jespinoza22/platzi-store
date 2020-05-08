@@ -66,4 +66,11 @@ export class ProductDetailComponent implements OnInit {
       console.log(rpta);
     });
   }
+
+  getRandomUsers(){
+    this.productsService.getRandomUser()
+    .subscribe(users => {
+      console.log(users);
+    });
+  }
 }
