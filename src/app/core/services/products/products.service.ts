@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Product } from './../../models/product.model';
 
+import * as Sentry from '@sentry/browser';
+
 import { environment } from './../../../../environments/environment';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
 
 interface User {
   email: string;
@@ -43,9 +45,16 @@ export class ProductsService {
   }
 
   getRandomUser(): Observable<User[]>{
-    return this.http.get('https://www.randomuser.me/api?results=3')
+    return this.http.get('https://www.randomuser.mex/api?results=3')
     .pipe(
+      catchError(this.handleError),
       map((response: any ) => response.results as User[])
     );
+  }
+
+  private handleError(error: HttpErrorResponse){
+    console.log(error);
+    Sentry.captureException(error);
+    return throwError('ups!! algo salio mal');
   }
 }
