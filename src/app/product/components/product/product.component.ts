@@ -7,9 +7,9 @@ import {
     OnDestroy
 } from '@angular/core';
 
-import { Product } from '../../../core/models/product.model';
+import { Product } from '@core/models/product.model';
 
-import { CartService } from './../../../core/services/cart.service';
+import { CartService } from '@core/services/cart.service';
 
 @Component({
     selector: 'app-product',
@@ -40,7 +40,6 @@ export class ProductComponent implements OnInit, OnDestroy {
     addCart() {
         console.log('añadir al carrito');
         this.cartService.addCart(this.product);
-        //this.productClicked.emit(this.product.id);
     }
 
 }

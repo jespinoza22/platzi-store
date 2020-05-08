@@ -1,67 +1,68 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { ProductsService } from './../../../core/services/products/products.service';
-import { Product } from './../../../core/models/product.model';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { ProductsService } from '@core/services/products/products.service';
+import { Product } from '@core/models/product.model';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.scss']
+  styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-
-  product: Product;
+  product$: Observable<Product>;
 
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      const id = params.id;
-      this.fethcProduct(id);
-      //this.product = this.productsService.getProduct(id);
-    });
+    this.product$ = this.route.params
+      .pipe(
+        switchMap((params: Params) => {
+          return this.productsService.getProduct(params.id);
+        })
+      );
   }
 
-  fethcProduct(id: string){
-    this.productsService.getProduct(id)
-    .subscribe(product => {
-      this.product = product;
-    });
-  }
+  // fethcProduct(id: string) {
+  //   this.productsService.getProduct(id).subscribe((product) => {
+  //     this.product = product;
+  //   });
+  // }
 
-  createProduct(){
+  createProduct() {
     const newProduct: Product = {
       id: '123',
       title: 'nuevo desde angular',
       image: 'assets/images/banner-1.jpg',
       price: 3000,
       description: 'nuevo producto',
-      quantity: 0//jnr
+      quantity: 0, //jnr
     };
-    this.productsService.createProduct(newProduct)
-    .subscribe(product => {
+    this.productsService.createProduct(newProduct).subscribe((product) => {
       console.log(product);
     });
   }
 
-  updateProduct(){
+  updateProduct() {
     const updateProduct: Partial<Product> = {
       price: 1515,
-      description: 'edicion titulo 1'
+      description: 'edicion titulo 1',
     };
-    this.productsService.updateProduct('123', updateProduct)
-    .subscribe(product => {
-      console.log(product);
-    });
+    this.productsService
+      .updateProduct('123', updateProduct)
+      .subscribe((product) => {
+        console.log(product);
+      });
   }
 
-  deleteProduct(){
-    this.productsService.deleteProduct('123')
-    .subscribe(rpta => {
+  deleteProduct() {
+    this.productsService.deleteProduct('123').subscribe((rpta) => {
       console.log(rpta);
     });
   }
