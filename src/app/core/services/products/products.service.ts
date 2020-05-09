@@ -8,7 +8,7 @@ import * as Sentry from '@sentry/browser';
 import { environment } from './../../../../environments/environment';
 
 import { Observable, throwError } from 'rxjs';
-import { map, catchError} from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
 
 interface User {
   email: string;
@@ -45,11 +45,16 @@ export class ProductsService {
   }
 
   getRandomUser(): Observable<User[]>{
-    return this.http.get('https://www.randomuser.mex/api?results=3')
+    return this.http.get('https://www.randomuserX.me/api?results=3')
     .pipe(
+      retry(3),
       catchError(this.handleError),
       map((response: any ) => response.results as User[])
     );
+  }
+
+  getFile(){
+    return this.http.get('assets/files/test.txt', {responseType: 'text'});
   }
 
   private handleError(error: HttpErrorResponse){
