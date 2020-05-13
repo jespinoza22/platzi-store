@@ -10,9 +10,9 @@ export class PreloadService implements PreloadingStrategy {
   constructor() { }
 
   preload(route: Route, load: () => Observable<any>): Observable<any>{
-    if (route.data && route.data['preload']){
+    if (route.data && route.data['preload']) {
       return load();
-    }else {
+    } else {
       return of();
     }
   }

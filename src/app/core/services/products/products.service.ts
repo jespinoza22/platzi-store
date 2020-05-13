@@ -59,7 +59,7 @@ export class ProductsService {
 
   private handleError(error: HttpErrorResponse){
     console.log(error);
-    //Sentry.captureException(error); descomentar
+    Sentry.captureException(error);
     return throwError('ups!! algo salio mal');
   }
 }

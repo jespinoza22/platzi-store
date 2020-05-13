@@ -58,12 +58,17 @@ const routes: Routes = [
   },
 ];
 
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes, {
+//     enableTracing: false,
+//     preloadingStrategy: QuicklinkModule,
+//     paramsInheritanceStrategy: 'always',
+//     initialNavigation: 'enabled'
+// })],
+//   exports: [RouterModule]
+// })
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    enableTracing: false,
-    preloadingStrategy: QuicklinkModule,
-    paramsInheritanceStrategy: 'always'
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
