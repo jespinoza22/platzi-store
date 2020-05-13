@@ -21,6 +21,7 @@ import { environment } from './../environments/environment';
 import * as Sentry from '@sentry/browser';
 
 import { AuthInterceptor } from './auth.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 /*if (environment.production) {
   Sentry.init({
@@ -48,7 +49,8 @@ Sentry.init({
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    QuicklinkModule
+    QuicklinkModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {
